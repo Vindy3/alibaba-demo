@@ -22,7 +22,7 @@ public class DepartController {
     }
 
     @DeleteMapping("/del/{id}")
-    public void deleteHandle(@PathVariable("id") int id) {
+    public void deleteHandle(@PathVariable("id") String id) {
         String url = SERVICE_PROVIDER + "/provider/depart/del/" + id;
         restTemplate.delete(url);
     }
@@ -34,7 +34,7 @@ public class DepartController {
     }
 
     @GetMapping("/get/{id}")
-    public Depart getHandle(@PathVariable("id") int id) {
+    public Depart getHandle(@PathVariable("id") String id) {
         String url = SERVICE_PROVIDER + "/provider/depart/get/" + id;
         return restTemplate.getForObject(url, Depart.class);
     }

@@ -22,7 +22,7 @@ public class DepartController {
     }
 
     @DeleteMapping("/del/{id}")
-    public boolean deleteHandle(@PathVariable("id") int id) {
+    public boolean deleteHandle(@PathVariable("id") String id) {
         return service.removeDepartById(id);
     }
 
@@ -32,7 +32,7 @@ public class DepartController {
     }
 
     @GetMapping("/get/{id}")
-    public Depart getHandle(@PathVariable("id") int id) {
+    public Depart getHandle(@PathVariable("id") String id) {
         return service.getDepartById(id);
     }
 

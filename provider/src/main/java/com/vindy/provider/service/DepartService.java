@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface DepartService extends IService<Depart> {
     boolean saveDepart(Depart depart);
-    boolean removeDepartById(int id);
+    boolean removeDepartById(String id);
     boolean modifyDepart(Depart depart);
-    Depart getDepartById(int id);
+    Depart getDepartById(String id);
     List<Depart> listAllDeparts();
 }

@@ -4,15 +4,24 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.vindy.provider.bean.Depart;
 import com.vindy.provider.repository.DepartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @RefreshScope 动态刷新配置。
+ */
 @Service
+@RefreshScope
 public class DepartServiceImpl extends ServiceImpl<DepartRepository, Depart> implements DepartService  {
 
     @Autowired
     private DepartRepository repository;
+
+    @Value("${depart.name}")
+    private String name;
 
     // 插入
     @Override
@@ -22,7 +31,7 @@ public class DepartServiceImpl extends ServiceImpl<DepartRepository, Depart> imp
 
     // 根据id删除
     @Override
-    public boolean removeDepartById(int id) {
+    public boolean removeDepartById(String id) {
         repository.deleteById(id);
         return true;
     }
@@ -30,18 +39,18 @@ public class DepartServiceImpl extends ServiceImpl<DepartRepository, Depart> imp
     // 修改
     @Override
     public boolean modifyDepart(Depart depart) {
-        return this.updateById(depart);
+        return updateById(depart);
     }
 
     // 根据id查询
     @Override
-    public Depart getDepartById(int id) {
-        Depart departById = this.getDepartById(id);
+    public Depart getDepartById(String id) {
+        Depart departById = getById(id);
         if(departById != null) {
             return departById;
         }
         Depart depart = new Depart();
-        depart.setName("no this depart");
+        depart.setName("no this depart"+name);
         return depart;
     }
 
